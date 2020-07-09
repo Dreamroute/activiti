@@ -13,6 +13,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +132,15 @@ public class GuideTest {
         Task task = taskService.newTask();
         taskService.saveTask(task);
         taskService.setVariableLocal(task.getId(), "name", "w.dehai");
+    }
+
+    @Test
+    public void moreTest() {
+        Deployment deploy = repositoryService.createDeployment().addClasspathResource("processes/ddd.bpmn").deploy();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId()).singleResult();
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId());
+        List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
+        System.err.println(tasks);
     }
 
 }

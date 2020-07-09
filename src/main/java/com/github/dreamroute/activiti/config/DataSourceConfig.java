@@ -25,7 +25,7 @@ public class DataSourceConfig {
         SpringProcessEngineConfiguration configuration = new SpringProcessEngineConfiguration();
         DataSource ds = dataSource();
         configuration.setDataSource(ds);
-        configuration.setDatabaseSchemaUpdate("true");
+        configuration.setDatabaseSchemaUpdate("false");
         return configuration;
     }
 
