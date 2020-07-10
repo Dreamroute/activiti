@@ -2,7 +2,7 @@ package com.github.dreamroute.activiti.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.activiti.engine.ProcessEngineConfiguration;
-import org.activiti.spring.SpringProcessEngineConfiguration;
+import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class DataSourceConfig {
 
     @Bean
     public ProcessEngineConfiguration processEngineConfiguration() {
-        SpringProcessEngineConfiguration configuration = new SpringProcessEngineConfiguration();
+        StandaloneProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration();
         DataSource ds = dataSource();
         configuration.setDataSource(ds);
         configuration.setDatabaseSchemaUpdate("false");
